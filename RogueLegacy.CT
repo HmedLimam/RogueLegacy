@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Godmode (Only activate Ingame)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RogueLegacy.exe
+  Version: 
+  Date   : 2020-06-24
+  Author : Ahmed-Infreezy
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,89 96 1C 01 00 00 8B BE) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(godmode)
+
+newmem:
+
+code:
+  cmp [esi+90], 0x11
+  je godmode
+  mov [esi+0000011C],edx
+  jmp return
+
+godmode:
+  // alternatively mov [ecx+75], 1
+  mov [esi+134],0
+  mov [esi+270],0x1388
+  mov [esi+274],0x1388
+  mov [esi+280],0x1388
+  mov [esi+298],0x1388
+  mov [esi+250],0x1388
+  mov [esi+2BA],1
+  mov [esi+2BB],1
+  //mov [esi+264],0x4f1a00 Invincibility
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 96 1C 01 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1398E517
+
+1398E502: 91                    -  xchg eax,ecx
+1398E503: 13 00                 -  adc eax,[eax]
+1398E505: 00 00                 -  add [eax],al
+1398E507: 00 C4                 -  add ah,al
+1398E509: 20 91 13 A0 9C 21     -  and [ecx+219CA013],dl
+1398E50F: 08 55 8B              -  or [ebp-75],dl
+1398E512: EC                    -  in al,dx
+1398E513: 57                    -  push edi
+1398E514: 56                    -  push esi
+1398E515: 8B F1                 -  mov esi,ecx
+// ---------- INJECTING HERE ----------
+1398E517: 89 96 1C 01 00 00     -  mov [esi+0000011C],edx
+// ---------- DONE INJECTING  ----------
+1398E51D: 8B BE 1C 01 00 00     -  mov edi,[esi+0000011C]
+1398E523: 8B CE                 -  mov ecx,esi
+1398E525: 8B 01                 -  mov eax,[ecx]
+1398E527: 8B 40 64              -  mov eax,[eax+64]
+1398E52A: FF 50 0C              -  call dword ptr [eax+0C]
+1398E52D: 3B C7                 -  cmp eax,edi
+1398E52F: 7D 10                 -  jnl 1398E541
+1398E531: 8B CE                 -  mov ecx,esi
+1398E533: 8B 01                 -  mov eax,[ecx]
+1398E535: 8B 40 64              -  mov eax,[eax+64]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Godmode - Remove invinciblity, keeps damage etc..."</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : RogueLegacy.exe
+  Version: 
+  Date   : 2020-06-24
+  Author : Ahmed-Infreezy
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,89 96 1C 01 00 00 8B BE) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [esi+2BA],0
+  mov [esi+2BB],0
+  mov [esi+0000011C],edx
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 96 1C 01 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1398E517
+
+1398E502: 91                    -  xchg eax,ecx
+1398E503: 13 00                 -  adc eax,[eax]
+1398E505: 00 00                 -  add [eax],al
+1398E507: 00 C4                 -  add ah,al
+1398E509: 20 91 13 A0 9C 21     -  and [ecx+219CA013],dl
+1398E50F: 08 55 8B              -  or [ebp-75],dl
+1398E512: EC                    -  in al,dx
+1398E513: 57                    -  push edi
+1398E514: 56                    -  push esi
+1398E515: 8B F1                 -  mov esi,ecx
+// ---------- INJECTING HERE ----------
+1398E517: 89 96 1C 01 00 00     -  mov [esi+0000011C],edx
+// ---------- DONE INJECTING  ----------
+1398E51D: 8B BE 1C 01 00 00     -  mov edi,[esi+0000011C]
+1398E523: 8B CE                 -  mov ecx,esi
+1398E525: 8B 01                 -  mov eax,[ecx]
+1398E527: 8B 40 64              -  mov eax,[eax+64]
+1398E52A: FF 50 0C              -  call dword ptr [eax+0C]
+1398E52D: 3B C7                 -  cmp eax,edi
+1398E52F: 7D 10                 -  jnl 1398E541
+1398E531: 8B CE                 -  mov ecx,esi
+1398E533: 8B 01                 -  mov eax,[ecx]
+1398E535: 8B 40 64              -  mov eax,[eax+64]
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"InfiniteMana"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RogueLegacy.exe
+  Version: 
+  Date   : 2020-06-24
+  Author : Ahmed-Infreezy
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,08 D9 9E AC 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  jmp return
+
+INJECT+01:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT+01:
+  db D9 9E AC 01 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1398E9CA
+
+1398E9BA: 91                    -  xchg eax,ecx
+1398E9BB: 13 FC                 -  adc edi,esp
+1398E9BD: A5                    -  movsd 
+1398E9BE: 21 08                 -  and [eax],ecx
+1398E9C0: 55                    -  push ebp
+1398E9C1: 8B EC                 -  mov ebp,esp
+1398E9C3: 56                    -  push esi
+1398E9C4: 50                    -  push eax
+1398E9C5: 8B F1                 -  mov esi,ecx
+1398E9C7: D9 45 08              -  fld dword ptr [ebp+08]
+// ---------- INJECTING HERE ----------
+1398E9CA: D9 9E AC 01 00 00     -  fstp dword ptr [esi+000001AC]
+// ---------- DONE INJECTING  ----------
+1398E9D0: D9 86 AC 01 00 00     -  fld dword ptr [esi+000001AC]
+1398E9D6: D9 EE                 -  fldz 
+1398E9D8: DF F1                 -  fcomip st(0),st(1)
+1398E9DA: DD D8                 -  fstp st(0)
+1398E9DC: 7A 0A                 -  jp 1398E9E8
+1398E9DE: 76 08                 -  jna 1398E9E8
+1398E9E0: D9 EE                 -  fldz 
+1398E9E2: D9 9E AC 01 00 00     -  fstp dword ptr [esi+000001AC]
+1398E9E8: D9 86 AC 01 00 00     -  fld dword ptr [esi+000001AC]
+1398E9EE: 8B CE                 -  mov ecx,esi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"FlyHack (Double Jump Should Be On - Vault Rune)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RogueLegacy.exe
+  Version: 
+  Date   : 2020-06-24
+  Author : Ahmed-Infreezy
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,FE 83 AA 02 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db FE 83 AA 02 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 06F1C593
+
+06F1C56B: 8D 4D 88              -  lea ecx,[ebp-78]
+06F1C56E: E8 5D 90 C1 FB        -  call 02B355D0
+06F1C573: 8D 45 88              -  lea eax,[ebp-78]
+06F1C576: 83 EC 08              -  sub esp,08
+06F1C579: F3 0F 7E 00           -  movq xmm0,[eax]
+06F1C57D: 66 0F D6 04 24        -  movq [esp],xmm0
+06F1C582: 8B CE                 -  mov ecx,esi
+06F1C584: 39 09                 -  cmp [ecx],ecx
+06F1C586: FF 15 64 EC 64 0D     -  call dword ptr [0D64EC64]
+06F1C58C: C6 83 A9 02 00 00 01  -  mov byte ptr [ebx+000002A9],01
+// ---------- INJECTING HERE ----------
+06F1C593: FE 83 AA 02 00 00     -  inc byte ptr [ebx+000002AA]
+// ---------- DONE INJECTING  ----------
+06F1C599: 8B 0D 90 7E 33 04     -  mov ecx,[04337E90]
+06F1C59F: E8 EC D8 A3 0A        -  call 11959E90
+06F1C5A4: 8B 0D A4 3D D6 03     -  mov ecx,[03D63DA4]
+06F1C5AA: 8D 55 80              -  lea edx,[ebp-80]
+06F1C5AD: 39 09                 -  cmp [ecx],ecx
+06F1C5AF: E8 E4 0C A5 0C        -  call 1396D298
+06F1C5B4: D9 45 80              -  fld dword ptr [ebp-80]
+06F1C5B7: D9 05 B8 D5 F1 06     -  fld dword ptr [06F1D5B8]
+06F1C5BD: DF F1                 -  fcomip st(0),st(1)
+06F1C5BF: DD D8                 -  fstp st(0)
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"DashHack (Left Only)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RogueLegacy.exe
+  Version: 
+  Date   : 2020-06-24
+  Author : Ahmed-Infreezy
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,FE 83 AB 02 00 00 FF) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  nop
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db FE 83 AB 02 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 06F1D0DC
+
+06F1D0B1: E8 9A CE E0 6B                 -  call clr.dll+19F50
+06F1D0B6: 8B CE                          -  mov ecx,esi
+06F1D0B8: E8 E3 48 FF FF                 -  call 06F119A0
+06F1D0BD: E9 F2 01 00 00                 -  jmp 06F1D2B4
+06F1D0C2: 8B 0D DC 3D D6 03              -  mov ecx,[03D63DDC]
+06F1D0C8: BA 0F 00 00 00                 -  mov edx,0000000F
+06F1D0CD: 39 09                          -  cmp [ecx],ecx
+06F1D0CF: E8 E4 70 7D 0A                 -  call 116F41B8
+06F1D0D4: 85 C0                          -  test eax,eax
+06F1D0D6: 0F 84 D8 01 00 00              -  je 06F1D2B4
+// ---------- INJECTING HERE ----------
+06F1D0DC: FE 83 AB 02 00 00              -  inc byte ptr [ebx+000002AB]
+// ---------- DONE INJECTING  ----------
+06F1D0E2: FF B3 FC 01 00 00              -  push [ebx+000001FC]
+06F1D0E8: 8B CB                          -  mov ecx,ebx
+06F1D0EA: E8 61 2B A5 0C                 -  call 1396FC50
+06F1D0EF: C7 83 2C 01 00 00 04 00 00 00  -  mov [ebx+0000012C],00000004
+06F1D0F9: C6 83 DC 00 00 00 00           -  mov byte ptr [ebx+000000DC],00
+06F1D100: D9 83 B8 01 00 00              -  fld dword ptr [ebx+000001B8]
+06F1D106: D9 9B F8 01 00 00              -  fstp dword ptr [ebx+000001F8]
+06F1D10C: D9 83 B0 01 00 00              -  fld dword ptr [ebx+000001B0]
+06F1D112: D9 9B F4 01 00 00              -  fstp dword ptr [ebx+000001F4]
+06F1D118: C6 83 AC 02 00 00 01           -  mov byte ptr [ebx+000002AC],01
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"Manor &amp; InGame 100K Coins (Only activate after changing money)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RogueLegacy.exe
+  Version: 
+  Date   : 2020-06-24
+  Author : Ahmed-Infreezy
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,89 51 2C 83 79 2C 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [ecx+2C],0x186a0
+  cmp dword ptr [ecx+2C],00
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 2
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 51 2C 83 79 2C 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 12FD3D70
+
+12FD3D58: 00 00                 -  add [eax],al
+12FD3D5A: 00 00                 -  add [eax],al
+12FD3D5C: 00 00                 -  add [eax],al
+12FD3D5E: 00 00                 -  add [eax],al
+12FD3D60: AC                    -  lodsb 
+12FD3D61: 1B FA                 -  sbb edi,edx
+12FD3D63: 12 00                 -  adc al,byte ptr [eax]
+12FD3D65: 00 00                 -  add [eax],al
+12FD3D67: 00 A4 1B FA 12 90 C9  -  add [ebx+ebx-366FED06],ah
+12FD3D6E: D2 05 89 51           - db D2 05 89 51  // SHORTENED TO HIT INJECTION FROM:  rol byte ptr [832C5189],cl
+// ---------- INJECTING HERE ----------
+12FD3D72: 2C 83                 -  sub al,-7D
+12FD3D74: 79 2C                 -  jns 12FD3DA2
+12FD3D76: 00 7D 05              -  add [ebp+05],bh
+// ---------- DONE INJECTING  ----------
+12FD3D79: 33 D2                 -  xor edx,edx
+12FD3D7B: 89 51 2C              -  mov [ecx+2C],edx
+12FD3D7E: C3                    -  ret 
+12FD3D7F: 00 CC                 -  add ah,cl
+12FD3D81: 1B FA                 -  sbb edi,edx
+12FD3D83: 12 00                 -  adc al,byte ptr [eax]
+12FD3D85: 00 00                 -  add [eax],al
+12FD3D87: 00 C4                 -  add ah,al
+12FD3D89: 1B FA                 -  sbb edi,edx
+12FD3D8B: 12 A8 C9 D2 05 89     -  adc ch,byte ptr [eax-SHELL32.dll+262D37]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"IgnoreCharon (Only activate after first run)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : RogueLegacy.exe
+  Version: 
+  Date   : 2020-06-23
+  Author : Ahmed-Infreezy
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,C3 89 41 2C 83 79 2C 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(ignore)
+
+newmem:
+
+code:
+  /*cmp eax,eax
+  je ignore
+  mov [ecx+2C],eax
+  cmp dword ptr [ecx+2C],00*/
+  nop
+  jmp return
+
+
+ignore:
+  nop
+  jmp return
+
+INJECT+01:
+  jmp newmem
+  nop 2
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT+01:
+  db 89 41 2C 83 79 2C 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 05E49218
+
+05E491F6: D8 4D D8              -  fmul dword ptr [ebp-28]
+05E491F9: 8B 0D A4 3D EA 03     -  mov ecx,[03EA3DA4]
+05E491FF: 8B 41 2C              -  mov eax,[ecx+2C]
+05E49202: D9 C0                 -  fld st(0)
+05E49204: DD 5D C8              -  fstp qword ptr [ebp-38]
+05E49207: DD 45 C8              -  fld qword ptr [ebp-38]
+05E4920A: DD 5D C8              -  fstp qword ptr [ebp-38]
+05E4920D: F2 0F 10 45 C8        -  movsd xmm0,[ebp-38]
+05E49212: F2 0F 2C D8           -  cvttsd2si ebx,xmm0
+05E49216: 2B C3                 -  sub eax,ebx
+// ---------- INJECTING HERE ----------
+05E49218: 89 41 2C              -  mov [ecx+2C],eax
+05E4921B: 83 79 2C 00           -  cmp dword ptr [ecx+2C],00
+// ---------- DONE INJECTING  ----------
+05E4921F: 7D 05                 -  jnl 05E49226
+05E49221: 33 D2                 -  xor edx,edx
+05E49223: 89 51 2C              -  mov [ecx+2C],edx
+05E49226: D9 EE                 -  fldz 
+05E49228: DF F1                 -  fcomip st(0),st(1)
+05E4922A: DD D8                 -  fstp st(0)
+05E4922C: 7A 63                 -  jp 05E49291
+05E4922E: 73 61                 -  jae 05E49291
+05E49230: 8B 86 90 00 00 00     -  mov eax,[esi+00000090]
+05E49236: 8B 80 F8 00 00 00     -  mov eax,[eax+000000F8]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Code :mov byte ptr [ebx+000002A9],01</Description>
+      <AddressString>06F1C2B9</AddressString>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>17</Byte>
+        <Byte>72</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>C6</Byte>
+        <Byte>83</Byte>
+        <Byte>A9</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>0D</Byte>
+        <Byte>A4</Byte>
+        <Byte>3D</Byte>
+        <Byte>D6</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov byte ptr [eax+000002A9],00</Description>
+      <AddressString>06F16F33</AddressString>
+      <Before>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>FD</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>C6</Byte>
+        <Byte>80</Byte>
+        <Byte>A9</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>80</Byte>
+        <Byte>AA</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [edx+000002AF],al</Description>
+      <AddressString>06F16188</AddressString>
+      <Before>
+        <Byte>95</Byte>
+        <Byte>C0</Byte>
+        <Byte>FD</Byte>
+        <Byte>FF</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>88</Byte>
+        <Byte>82</Byte>
+        <Byte>AF</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>82</Byte>
+        <Byte>30</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="RogueCastle.PlayerObj" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="4" Vartype="Pointer" Bytesize="8" Description="StatLevelHPMod" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" Description="StatLevelDMGMod" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="8" Description="InitialLogicDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" Description="m_projectileRadiusTexture" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="20" Vartype="4 Bytes" Bytesize="4" Description="ItemDropChance" DisplayMethod="Signed Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" Description="MinMoneyDropAmount" DisplayMethod="Signed Integer"/>
+        <Element Offset="28" Vartype="Float" Bytesize="4" Description="MoneyDropChance" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Float" Bytesize="4" Description="m_invincibilityTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="36" Vartype="Float" Bytesize="4" Description="m_invincibleCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Float" Bytesize="4" Description="m_initialDelayCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" Description="m_resetSpriteName" DisplayMethod="Signed Integer"/>
+        <Element Offset="48" Vartype="Float" Bytesize="4" Description="m_numTouchingGrounds" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="52" Vartype="Float" Bytesize="4" Description="m_cooldownLB" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Float" Bytesize="4" Description="m_engageRadiusTexture" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" Description="m_meleeRadiusTexture" DisplayMethod="Signed Integer"/>
+        <Element Offset="64" Vartype="Byte" Bytesize="1" Description="StatLevelXPMod" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="65" Vartype="Byte" Bytesize="1" Description="m_target" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="66" Vartype="Byte" Bytesize="1" Description="m_walkingLB" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="67" Vartype="Byte" Bytesize="1" Description="m_currentActiveLB" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="Byte" Bytesize="1" Description="m_cooldownParams" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="69" Vartype="Byte" Bytesize="1" Description="SaveToFile" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="70" Vartype="Byte" Bytesize="1" Description="Type" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="71" Vartype="Byte" Bytesize="1" Description="m_isPaused" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Float" Bytesize="4" Description="MinMoneyGainPerLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="76" Vartype="Float" Bytesize="4" Description="MinMoneyGainPerLevel_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" Description="MaxMoneyGainPerLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" Description="MaxMoneyGainPerLevel_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Float" Bytesize="4" Description="MaxMoneyDropAmount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="Float" Bytesize="4" Description="MaxMoneyDropAmount_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Float" Bytesize="4" Description="m_invincibleCounterProjectile" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="100" Vartype="Float" Bytesize="4" Description="m_invincibleCounterProjectile_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" Description="m_runCooldown" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" Description="m_cooldownTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" Description="m_cooldownTimer_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="116" Vartype="Pointer" Bytesize="8" Description="m_fern3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" Description="m_tutorialText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="124" Vartype="Pointer" Bytesize="8" Description="m_creditsTextList" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="4 Bytes" Bytesize="4" Description="m_smokeCounter" DisplayMethod="Signed Integer"/>
+        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" Description="m_kingKilled" DisplayMethod="Signed Integer"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" Description="m_tutorialText" DisplayMethod="Signed Integer"/>
+        <Element Offset="140" Vartype="4 Bytes" Bytesize="4" Description="m_waypointIndex" DisplayMethod="Signed Integer"/>
+        <Element Offset="144" Vartype="4 Bytes" Bytesize="4" Description="m_waypointList" DisplayMethod="Signed Integer"/>
+        <Element Offset="148" Vartype="4 Bytes" Bytesize="4" Description="m_tutorialTextList" DisplayMethod="Signed Integer"/>
+        <Element Offset="152" Vartype="Float" Bytesize="4" Description="m_creditsText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="156" Vartype="Float" Bytesize="4" Description="m_creditsTitleText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Float" Bytesize="4" Description="m_creditsPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" Description="m_creditsIndex" DisplayMethod="Signed Integer"/>
+        <Element Offset="168" Vartype="4 Bytes" Bytesize="4" Description="m_diary" DisplayMethod="Signed Integer"/>
+        <Element Offset="172" Vartype="Byte" Bytesize="1" Description="m_displayText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="173" Vartype="Byte" Bytesize="1" Description="m_king" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="174" Vartype="Byte" Bytesize="1" Description="m_tutorialControllerTextList" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="176" Vartype="4 Bytes" Bytesize="4" Description="m_inSecondPart" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="180" Vartype="4 Bytes" Bytesize="4" Description="m_inSecondPart_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" Description="m_inSecondPart_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="188" Vartype="4 Bytes" Bytesize="4" Description="m_inSecondPart_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" Description="m_creditsTextTitleList" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="196" Vartype="Pointer" Bytesize="8" Description="&lt;Chasing&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Pointer" Bytesize="8" Description="m_generalAdvancedLB" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="204" Vartype="Pointer" Bytesize="8" Description="m_blitSFX" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="4 Bytes" Bytesize="4" Description="m_delayCounter" DisplayMethod="Signed Integer"/>
+        <Element Offset="212" Vartype="Byte" Bytesize="1" Description="m_generalExpertLB" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="213" Vartype="Byte" Bytesize="1" Description="m_generalMiniBossLB" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="214" Vartype="Byte" Bytesize="1" Description="FireballDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="215" Vartype="Byte" Bytesize="1" Description="m_delayObj" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="216" Vartype="Byte" Bytesize="1" Description="m_logo" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="217" Vartype="Byte" Bytesize="1" Description="m_logoIcon" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="218" Vartype="Byte" Bytesize="1" Description="m_player" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="219" Vartype="Byte" Bytesize="1" Description="m_spotlight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="220" Vartype="Byte" Bytesize="1" Description="m_titlePlate" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="221" Vartype="Byte" Bytesize="1" Description="m_title" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="222" Vartype="Byte" Bytesize="1" Description="m_cameraPos" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="223" Vartype="Byte" Bytesize="1" Description="m_songName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" Description="&lt;Shake&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="228" Vartype="4 Bytes" Bytesize="4" Description="&lt;Shake&gt;k__BackingField_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" Description="m_generalBasicLB" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" Description="m_generalBasicLB_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="240" Vartype="4 Bytes" Bytesize="4" Description="m_generalBasicLB_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" Description="m_generalBasicLB_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="Pointer" Bytesize="8" Description="m_levelScreen" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="252" Vartype="Pointer" Bytesize="8" Description="&lt;LocStringID&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="256" Vartype="Float" Bytesize="4" Description="CurrentAirSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="260" Vartype="Float" Bytesize="4" Description="SlopeClimbRotation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="264" Vartype="4 Bytes" Bytesize="4" Description="StepUp" DisplayMethod="Signed Integer"/>
+        <Element Offset="268" Vartype="4 Bytes" Bytesize="4" Description="InternalFlip" DisplayMethod="Signed Integer"/>
+        <Element Offset="272" Vartype="Float" Bytesize="4" Description="m_internalRotation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="276" Vartype="Float" Bytesize="4" Description="m_internalAnimationDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="Float" Bytesize="4" Description="m_blinkTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="284" Vartype="4 Bytes" Bytesize="4" Description="m_currentHealth" DisplayMethod="Signed Integer"/>
+        <Element Offset="288" Vartype="Float" Bytesize="4" Description="&lt;JumpHeight&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="292" Vartype="4 Bytes" Bytesize="4" Description="&lt;MaxHealth&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="296" Vartype="Float" Bytesize="4" Description="&lt;DoubleJumpHeight&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" Description="&lt;State&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="304" Vartype="Byte" Bytesize="1" Description="m_isTouchingGround" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="305" Vartype="Byte" Bytesize="1" Description="m_isKilled" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="306" Vartype="Byte" Bytesize="1" Description="m_internalLockFlip" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="307" Vartype="Byte" Bytesize="1" Description="m_internalIsWeighted" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="308" Vartype="Byte" Bytesize="1" Description="&lt;CanBeKnockedBack&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="312" Vartype="Float" Bytesize="4" Description="m_internalScale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="316" Vartype="Float" Bytesize="4" Description="m_internalScale_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="320" Vartype="4 Bytes" Bytesize="4" Description="m_blinkColour" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="324" Vartype="Float" Bytesize="4" Description="&lt;KnockBack&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="328" Vartype="Float" Bytesize="4" Description="&lt;KnockBack&gt;k__BackingField_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="332" Vartype="Pointer" Bytesize="8" Description="m_game" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="336" Vartype="Pointer" Bytesize="8" Description="m_currentLogicSet" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="340" Vartype="Pointer" Bytesize="8" Description="m_standingAttack3LogicSet" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="Pointer" Bytesize="8" Description="m_airAttackLS" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="348" Vartype="Pointer" Bytesize="8" Description="m_debugInputMap" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="Pointer" Bytesize="8" Description="m_playerHead" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="356" Vartype="Pointer" Bytesize="8" Description="m_playerLegs" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="360" Vartype="Pointer" Bytesize="8" Description="m_walkUpSound" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="364" Vartype="Pointer" Bytesize="8" Description="m_walkUpSoundLow" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="368" Vartype="Pointer" Bytesize="8" Description="m_walkUpSoundHigh" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="372" Vartype="Pointer" Bytesize="8" Description="m_walkDownSound" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="376" Vartype="Pointer" Bytesize="8" Description="m_walkDownSoundLow" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="380" Vartype="Pointer" Bytesize="8" Description="m_walkDownSoundHigh" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="Pointer" Bytesize="8" Description="m_lastTouchedTeleporter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="388" Vartype="Pointer" Bytesize="8" Description="m_externalLS" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="392" Vartype="Pointer" Bytesize="8" Description="m_flightDurationText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="396" Vartype="Pointer" Bytesize="8" Description="m_translocatorSprite" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="400" Vartype="Pointer" Bytesize="8" Description="m_swearBubble" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="404" Vartype="Pointer" Bytesize="8" Description="m_flipTween" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="408" Vartype="Pointer" Bytesize="8" Description="m_wizardSpellList" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="412" Vartype="Pointer" Bytesize="8" Description="m_closestGround" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="416" Vartype="Pointer" Bytesize="8" Description="m_axeProjData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="420" Vartype="Pointer" Bytesize="8" Description="m_rapidDaggerProjData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="424" Vartype="Float" Bytesize="4" Description="JumpDeceleration" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="428" Vartype="Float" Bytesize="4" Description="m_currentMana" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="432" Vartype="Float" Bytesize="4" Description="DashTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="436" Vartype="Float" Bytesize="4" Description="DashSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="440" Vartype="Float" Bytesize="4" Description="DashCoolDown" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="444" Vartype="Float" Bytesize="4" Description="m_manaGain" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="448" Vartype="Float" Bytesize="4" Description="ComboDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="452" Vartype="Float" Bytesize="4" Description="BaseStatDropChance" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="456" Vartype="Float" Bytesize="4" Description="m_flightCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="460" Vartype="4 Bytes" Bytesize="4" Description="DamageGainPerLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="464" Vartype="4 Bytes" Bytesize="4" Description="ManaGainPerLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="468" Vartype="4 Bytes" Bytesize="4" Description="HealthGainPerLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="472" Vartype="Float" Bytesize="4" Description="m_invincibleCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="476" Vartype="Float" Bytesize="4" Description="m_dropThroughGroundTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="480" Vartype="Float" Bytesize="4" Description="m_dropThroughGroundDuration" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="484" Vartype="Float" Bytesize="4" Description="m_blockInvincibleCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="488" Vartype="4 Bytes" Bytesize="4" Description="m_playerIndex" DisplayMethod="Signed Integer"/>
+        <Element Offset="492" Vartype="Float" Bytesize="4" Description="m_attackCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="496" Vartype="4 Bytes" Bytesize="4" Description="m_attackNumber" DisplayMethod="Signed Integer"/>
+        <Element Offset="500" Vartype="Float" Bytesize="4" Description="m_dashCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="504" Vartype="Float" Bytesize="4" Description="m_dashCooldownCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="508" Vartype="Float" Bytesize="4" Description="m_startingAnimationDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="512" Vartype="Float" Bytesize="4" Description="m_blockManaDrain" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="516" Vartype="4 Bytes" Bytesize="4" Description="ArmorReductionMod" DisplayMethod="Signed Integer"/>
+        <Element Offset="520" Vartype="Float" Bytesize="4" Description="RunSpeedMultiplier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="524" Vartype="Float" Bytesize="4" Description="m_swearBubbleCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="528" Vartype="Float" Bytesize="4" Description="m_assassinSmokeTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="532" Vartype="Float" Bytesize="4" Description="m_assassinDrainCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="536" Vartype="Float" Bytesize="4" Description="m_timeStopDrainCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="540" Vartype="Float" Bytesize="4" Description="m_damageShieldDrainCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="544" Vartype="Float" Bytesize="4" Description="m_tanookiDrainCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="548" Vartype="Float" Bytesize="4" Description="m_dragonManaRechargeCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="552" Vartype="Float" Bytesize="4" Description="m_lightDrainCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="556" Vartype="Float" Bytesize="4" Description="m_wizardSparkleCounter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="560" Vartype="Float" Bytesize="4" Description="m_ninjaTeleportDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="564" Vartype="Float" Bytesize="4" Description="m_spellCastDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="568" Vartype="Float" Bytesize="4" Description="m_rapidSpellCastDelay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="572" Vartype="Float" Bytesize="4" Description="m_ambilevousTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="576" Vartype="Float" Bytesize="4" Description="AxeProjectileSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="580" Vartype="Float" Bytesize="4" Description="DaggerProjectileSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="584" Vartype="Float" Bytesize="4" Description="m_Spell_Close_Lifespan" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="588" Vartype="Float" Bytesize="4" Description="m_Spell_Close_Scale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="592" Vartype="4 Bytes" Bytesize="4" Description="&lt;BaseDamage&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="596" Vartype="Float" Bytesize="4" Description="&lt;BaseMana&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="600" Vartype="4 Bytes" Bytesize="4" Description="&lt;BaseHealth&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="604" Vartype="Float" Bytesize="4" Description="&lt;ProjectileLifeSpan&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="608" Vartype="Float" Bytesize="4" Description="&lt;AttackDelay&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="612" Vartype="Float" Bytesize="4" Description="&lt;BaseInvincibilityTime&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="616" Vartype="Float" Bytesize="4" Description="&lt;BaseCriticalChance&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="620" Vartype="Float" Bytesize="4" Description="&lt;BaseCriticalDamageMod&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="624" Vartype="4 Bytes" Bytesize="4" Description="&lt;MaxDamage&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="628" Vartype="4 Bytes" Bytesize="4" Description="&lt;MinDamage&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="632" Vartype="4 Bytes" Bytesize="4" Description="&lt;LevelModifier&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="636" Vartype="Float" Bytesize="4" Description="&lt;AttackAnimationDelay&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="640" Vartype="4 Bytes" Bytesize="4" Description="&lt;StrongDamage&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="644" Vartype="Float" Bytesize="4" Description="&lt;AirAttackKnockBack&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="648" Vartype="Float" Bytesize="4" Description="&lt;AirAttackDamageMod&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="652" Vartype="Float" Bytesize="4" Description="&lt;StatDropIncrease&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="656" Vartype="Float" Bytesize="4" Description="&lt;FlightSpeedMod&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="660" Vartype="4 Bytes" Bytesize="4" Description="&lt;BaseWeight&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="664" Vartype="Float" Bytesize="4" Description="&lt;BaseMagicDamage&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="668" Vartype="Float" Bytesize="4" Description="&lt;FlightTime&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="672" Vartype="Float" Bytesize="4" Description="&lt;BlockInvincibleTime&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="676" Vartype="4 Bytes" Bytesize="4" Description="&lt;NumAirBounces&gt;k__BackingField" DisplayMethod="Signed Integer"/>
+        <Element Offset="680" Vartype="Byte" Bytesize="1" Description="m_isFlying" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="681" Vartype="Byte" Bytesize="1" Description="m_isJumping" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="682" Vartype="Byte" Bytesize="1" Description="m_doubleJumpCount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="683" Vartype="Byte" Bytesize="1" Description="m_airDashCount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="684" Vartype="Byte" Bytesize="1" Description="m_lockControls" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="685" Vartype="Byte" Bytesize="1" Description="m_attacksNeededForMana" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="686" Vartype="Byte" Bytesize="1" Description="m_numSequentialAttacks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="687" Vartype="Byte" Bytesize="1" Description="m_previousIsTouchingGround" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="688" Vartype="Byte" Bytesize="1" Description="m_assassinSpecialActive" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="689" Vartype="Byte" Bytesize="1" Description="m_timeStopCast" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="690" Vartype="Byte" Bytesize="1" Description="m_megaDamageShieldCast" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="691" Vartype="Byte" Bytesize="1" Description="m_damageShieldCast" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="692" Vartype="Byte" Bytesize="1" Description="m_lightOn" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="693" Vartype="Byte" Bytesize="1" Description="m_collidingLeft" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="694" Vartype="Byte" Bytesize="1" Description="m_collidingRight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="695" Vartype="Byte" Bytesize="1" Description="m_collidingLeftOnly" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="696" Vartype="Byte" Bytesize="1" Description="m_collidingRightOnly" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="697" Vartype="Byte" Bytesize="1" Description="&lt;IsAirAttacking&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="698" Vartype="Byte" Bytesize="1" Description="&lt;ForceInvincible&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="699" Vartype="Byte" Bytesize="1" Description="&lt;InvincibleToSpikes&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="700" Vartype="Float" Bytesize="4" Description="m_enemyKnockBack" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="704" Vartype="Float" Bytesize="4" Description="m_enemyKnockBack_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="708" Vartype="4 Bytes" Bytesize="4" Description="m_skinColour1" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="712" Vartype="4 Bytes" Bytesize="4" Description="m_skinColour2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="716" Vartype="4 Bytes" Bytesize="4" Description="m_lichColour1" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="720" Vartype="4 Bytes" Bytesize="4" Description="m_lichColour2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="724" Vartype="Float" Bytesize="4" Description="AxeSpellScale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="728" Vartype="Float" Bytesize="4" Description="AxeSpellScale_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="732" Vartype="Float" Bytesize="4" Description="DaggerSpellScale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="736" Vartype="Float" Bytesize="4" Description="DaggerSpellScale_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="740" Vartype="Float" Bytesize="4" Description="&lt;StrongEnemyKnockBack&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="744" Vartype="Float" Bytesize="4" Description="&lt;StrongEnemyKnockBack&gt;k__BackingField_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="748" Vartype="Float" Bytesize="4" Description="&lt;StrongEnemyKnockBack&gt;k__BackingField_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="752" Vartype="Float" Bytesize="4" Description="&lt;StrongEnemyKnockBack&gt;k__BackingField_4" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
